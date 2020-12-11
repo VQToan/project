@@ -11,17 +11,18 @@ public class Room implements Serializable{
 	private Boolean status;
 	private int beds; // sá»‘ giÆ°á»�ng (1- Ä‘Æ¡n , 2- Ä‘Ã´i, 11- 2 láº»)
 	private String typeRoom; // (option : N - normal, V - vip)
-	private int price;
+	private int price1Hour;
+	private int priceOverNight;
 	public Room() {
 		super();
 	}
-	public Room(String iDsRoom, Boolean status, int beds, String typeRoom, int price) {
-		super();
-		this.iDsRoom = iDsRoom;
-		this.status = status;
-		this.beds = beds;
-		this.typeRoom = typeRoom;
-		this.price = price;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	@Override
+	public String toString() {
+		return "Room [iDsRoom=" + iDsRoom + ", status=" + status + ", beds=" + beds + ", typeRoom=" + typeRoom
+				+ ", price1Hour=" + price1Hour + ", priceOverNight=" + priceOverNight + "]";
 	}
 	public String getiDsRoom() {
 		return iDsRoom;
@@ -47,19 +48,26 @@ public class Room implements Serializable{
 	public void setTypeRoom(String typeRoom) {
 		this.typeRoom = typeRoom;
 	}
-	public int getPrice() {
-		return price;
+	public int getPrice1Hour() {
+		return price1Hour;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice1Hour(int price1Hour) {
+		this.price1Hour = price1Hour;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public int getPriceOverNight() {
+		return priceOverNight;
 	}
-	@Override
-	public String toString() {
-		return "Room [iDsRoom=" + iDsRoom + ", status=" + status + ", beds=" + beds + ", typeRoom=" + typeRoom
-				+ ", price=" + price + "]";
+	public void setPriceOverNight(int priceOverNight) {
+		this.priceOverNight = priceOverNight;
+	}
+	public Room(String iDsRoom, Boolean status, int beds, String typeRoom, int price1Hour, int priceOverNight) {
+		super();
+		this.iDsRoom = iDsRoom;
+		this.status = status;
+		this.beds = beds;
+		this.typeRoom = typeRoom;
+		this.price1Hour = price1Hour;
+		this.priceOverNight = priceOverNight;
 	}
 	public String getXMLStringofRoom() {
 		return "	<Room>\r\n"
@@ -67,7 +75,8 @@ public class Room implements Serializable{
 				+ "		<status>"+String.valueOf(status)+"</status>\r\n"
 				+ "		<beds>"+String.valueOf(beds)+"</beds>\r\n"
 				+ "		<typeRoom>"+typeRoom+"</typeRoom>\r\n"
-				+ "		<price>"+String.valueOf(price)+"</price>\r\n"
+				+ "		<price1Hour>"+String.valueOf(price1Hour)+"</price1Hour>\r\n"
+				+ "		<priceOverNight>"+String.valueOf(priceOverNight)+"</priceOverNight>\r\n"
 				+ "	</Room>";
 	}
 }

@@ -84,7 +84,7 @@ public class DataFile {
 				+ "\n</RoomList>";
 		FileOutputStream fos= null;
 		try {
-			fos = new FileOutputStream("D:\\Room1.xml");
+			fos = new FileOutputStream("D:\\Room.xml");
 			byte[] data = xmlString.getBytes();
 			fos.write(data);
 	}catch (Exception e) {
@@ -104,12 +104,12 @@ public class DataFile {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream("D:\\Room.xml");
-			SAXParserFactory factory = SAXParserFactory.newInstance();
-			SAXParser parser =factory.newSAXParser();
-			RoomHandler handler = new RoomHandler();
+			SAXParserFactory factory1 = SAXParserFactory.newInstance();
+			SAXParser parser1 =factory1.newSAXParser();
+			RoomHandler handler1 = new RoomHandler();
 			
-			parser.parse(fis, handler);
-			dataRooms= handler.getRoomlList();
+			parser1.parse(fis, handler1);
+			dataRooms= handler1.getRoomlList();
 			
 		}catch (FileNotFoundException ex) {
 			// TODO: handle exception

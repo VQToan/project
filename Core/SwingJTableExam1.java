@@ -1,4 +1,6 @@
 package Core;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -8,7 +10,12 @@ public class SwingJTableExam1 {
  
     SwingJTableExam1() {
         f = new JFrame();
- 
+        ArrayList<Customer> listcusCustomers = new ArrayList<>();
+    	ArrayList<Room> listRooms = new ArrayList<>();
+        ArrayList<Core.Customer> listCustomers = new ArrayList<>();
+        DataFile input= new DataFile();
+        listCustomers=input.importCustomer();
+        listRooms= input.importRoom();
         classtest a= new classtest();
         String data[][]= a.name();
         String column[] = { "ID", "NAME", "SALARY" };
@@ -24,6 +31,7 @@ public class SwingJTableExam1 {
     }
  
     public static void main(String[] args) {
+    	
         new SwingJTableExam1();
     }
 }

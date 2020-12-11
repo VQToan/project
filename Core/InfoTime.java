@@ -44,5 +44,10 @@ public class InfoTime {
 		return "InfoTime [timeIn=" + timeIn + ", dateIn=" + dateIn + ", timeOut=" + timeOut + ", dateOut=" + dateOut
 				+ "]";
 	}
-	
+	public String getStringIn() {
+		return timeIn+" "+dateIn;
+	}
+	public String getStringOut() {
+		return timeOut+" "+ dateOut;
+	}
 }

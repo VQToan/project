@@ -38,27 +38,30 @@ public class OptionSearch {
 //	}
 	//================ TIM THEO THONG TIN KHAC HANG======================//
 	public boolean check1(Customer data, String method, String key) {
-		if (key== "None") return true; 
+		boolean flag = false;
+		if (key== "None") flag= true; 
 		else {
-			if (method=="rollNo" && key==data.getRollNo()) return true;
-			if (method=="firstName" && key==data.getFirstName()) return true;
-			if (method=="fullName" && key==data.getFullName()) return true;
-			if (method=="iD" && key==data.getiD()) return true;
-			if (method=="iDRoom" && key==data.getiDRoom()) return true;
-			if (method=="dateIn" && key==data.getInOut().getdateIn()) return true;
-			if (method=="dateOut" && key==data.getInOut().getdateOut()) return true;
-			if (method=="timeIn" && key==data.getInOut().getTimeIn()) return true;
-			if (method=="timeOut" && key==data.getInOut().getTimeOut()) return true;
-			return false;
+			if (method.equals("rollNo") && data.getRollNo().equals(key)) flag= true;
+			if (method.equals("phoneNumber") && data.getPhoneNumber().equals(key)) flag = true;
+			if (method.equals("fullName") && data.getFullName().equals(key)) flag = true;
+			if (method.equals("iD") && data.getiD().equals(key)) flag= true;
+			if(method.equals("typeRent") && data.getTypeRent().equals(key)) flag= true;
+			if (method.equals("iDRoom") && data.getiDRoom().equals(key)) flag= true;
+			if (method.equals("dateIn") && data.getInOut().getdateIn().equals(key)) flag= true;
+			if (method.equals("dateOut") && data.getInOut().getdateOut().equals(key)) flag = true;
+			if (method.equals("timeIn" )&& data.getInOut().getTimeIn().equals(key)) flag= true;
+			if (method.equals("timeOut") && data.getInOut().getTimeOut().equals(key)) flag= true;
 		}
+		return flag;
 	}
-	public ArrayList<Customer> searchCustomers(ArrayList<Customer> dataCustomers, String rollNo, String firstName, String fullName, String iD, String iDRom, String dateIn,String dateOut, String timeIn, String timeOut) {
+	public ArrayList<Customer> searchCustomers(ArrayList<Customer> dataCustomers, String rollNo, String phoneNumber,String typeRent, String fullName, String iD, String iDRom, String dateIn,String dateOut, String timeIn, String timeOut) {
 		ArrayList<Customer> endSearchArrayList1 = new ArrayList<>();
 		for (Customer customer : dataCustomers) {
 			if(		check1(customer,"rollNo", rollNo)
-				&&	check1(customer,"firstName", firstName)
+				&&	check1(customer,"phoneNumber", phoneNumber)
 				&&	check1(customer,"fullName", fullName)
 				&&	check1(customer,"iD", iD)
+				&& check1(customer, "typeRent",typeRent )
 				&&	check1(customer,"iDRoom", iDRom)
 				&&	check1(customer,"dateIn", dateIn)
 				&&	check1(customer,"dateOut", dateOut)
@@ -77,25 +80,28 @@ public class OptionSearch {
 	 * */
 	
 	public boolean check(Room data, String method, String key) {
-		if (key=="None") return true;
+		boolean flag= false;
+		if (key=="None") flag= true;
 		else {
-			if (method== "iDsRoom" && data.getiDsRoom()==key ) return true;
-			if (method== "status" && String.valueOf(data.getStatus())==key) return true;
-			if (method== "beds" && String.valueOf(data.getBeds())==key) return true;
-			if(method== "typeRoom" && data.getTypeRoom()==key) return true;
-			if (method=="price" && String.valueOf(data.getPrice())==key) return true;
-			return false;
+			if (method.equals( "iDsRoom") && data.getiDsRoom().equals(key) ) flag= true;
+			if (method.equals( "status") && String.valueOf(data.getStatus()).equals(key)) flag= true;
+			if (method.equals( "beds") && String.valueOf(data.getBeds()).equals(key)) flag= true;
+			if(method.equals( "typeRoom") && data.getTypeRoom().equals(key)) flag= true;
+			if (method.equals("price1Hour") && String.valueOf(data.getPrice1Hour()).equals(key)) flag= true;
+			if (method.equals("priceOverNight") && String.valueOf(data.getPriceOverNight()).equals(key)) flag= true; 
 			}
+		return flag;
 	}
 	
-	public ArrayList<Room> SearchRoom(ArrayList<Room> dataRooms, String iDRoom, String status, String beds, String typeRoom, String prices){
+	public ArrayList<Room> SearchRoom(ArrayList<Room> dataRooms, String iDRoom, String status, String beds, String typeRoom, String price1Hour, String priceOverNight){
 		ArrayList<Room> endSearchArrayList = new ArrayList<>();
 		for (Room room : dataRooms) {
 			if (check(room, "iDsRoom", iDRoom)
 				&& check(room, "status", status)
 				&& check(room, "beds", beds)
 				&& check(room, "typeRoom", typeRoom)
-				&& check(room, "price", prices)) {
+				&& check(room, "price1Hour", price1Hour)
+				&& check(room, "priceOverNight", priceOverNight)) {
 				endSearchArrayList.add(room);
 			}
 		}
