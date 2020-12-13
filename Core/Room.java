@@ -9,7 +9,7 @@ public class Room implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String iDsRoom;
 	private Boolean status;
-	private int beds; // sá»‘ giÆ°á»�ng (1- Ä‘Æ¡n , 2- Ä‘Ã´i, 11- 2 láº»)
+	private String beds; // sá»‘ giÆ°á»�ng (1- Ä‘Æ¡n , 2- Ä‘Ã´i, 11- 2 láº»)
 	private String typeRoom; // (option : N - normal, V - vip)
 	private int price1Hour;
 	private int priceOverNight;
@@ -36,10 +36,10 @@ public class Room implements Serializable{
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	public int getBeds() {
+	public String getBeds() {
 		return beds;
 	}
-	public void setBeds(int beds) {
+	public void setBeds(String beds) {
 		this.beds = beds;
 	}
 	public String getTypeRoom() {
@@ -60,7 +60,7 @@ public class Room implements Serializable{
 	public void setPriceOverNight(int priceOverNight) {
 		this.priceOverNight = priceOverNight;
 	}
-	public Room(String iDsRoom, Boolean status, int beds, String typeRoom, int price1Hour, int priceOverNight) {
+	public Room(String iDsRoom, Boolean status, String beds, String typeRoom, int price1Hour, int priceOverNight) {
 		super();
 		this.iDsRoom = iDsRoom;
 		this.status = status;
@@ -73,7 +73,7 @@ public class Room implements Serializable{
 		return "	<Room>\r\n"
 				+ "		<iDsRoom>"+iDsRoom+"</iDsRoom>\r\n"
 				+ "		<status>"+String.valueOf(status)+"</status>\r\n"
-				+ "		<beds>"+String.valueOf(beds)+"</beds>\r\n"
+				+ "		<beds>"+beds+"</beds>\r\n"
 				+ "		<typeRoom>"+typeRoom+"</typeRoom>\r\n"
 				+ "		<price1Hour>"+String.valueOf(price1Hour)+"</price1Hour>\r\n"
 				+ "		<priceOverNight>"+String.valueOf(priceOverNight)+"</priceOverNight>\r\n"

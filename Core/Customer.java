@@ -112,11 +112,27 @@ public class Customer implements Serializable{
 	}
 	public long payment(ArrayList<Room> dataRoom) {
 		long amountPaid = 0;
-		OptionSearch search = new OptionSearch();
-		if(typeRent.equals("1Hour")) amountPaid= (search.SearchRoom(dataRoom, iDRoom, "None", "None",  "None",  "None",  "None").get(0).getPrice1Hour())*calTime();
+		if(typeRent.equals("1Hour")) amountPaid= valueSearch(dataRoom)*calTime();
 		else {
-			amountPaid= search.SearchRoom(dataRoom, iDRoom, "None", "None",  "None",  "None",  "None").get(0).getPriceOverNight();
+			amountPaid= valueSearch2(dataRoom);
 		}
 		return amountPaid;
+	}
+	
+	public int valueSearch(ArrayList<Room> dataRoom) {
+		OptionSearch search = new OptionSearch();
+		if (search.SearchRoom(dataRoom, iDRoom, "", "", "", "").size()>1) {
+			return search.SearchRoom(dataRoom, iDRoom, "", "", "", "").get(0).getPrice1Hour();
+		}else return 0;
+		
+		
+	}
+	public int valueSearch2(ArrayList<Room> dataRoom) {
+		OptionSearch search = new OptionSearch();
+		if (search.SearchRoom(dataRoom, iDRoom, "", "", "", "").size()>1) {
+			return search.SearchRoom(dataRoom, iDRoom, "", "", "", "").get(0).getPriceOverNight();
+		}else return 0;
+		
+		
 	}
 }

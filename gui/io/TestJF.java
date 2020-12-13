@@ -6,6 +6,7 @@
 package gui.io;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -16,14 +17,15 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.crypto.Data;
-
-import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
 import Core.*;
 import main.kma.io.CData;
@@ -53,13 +55,24 @@ public class TestJF extends javax.swing.JFrame {
         ArrayList<Room> dsRoom = new ArrayList<Room>();
         ArrayList<Customer> dsCus = new ArrayList<Customer>();
         DefaultTableModel tableModel;
+        DefaultTableModel tableModel1;
+        ArrayList<Core.Customer> listCustomers = new ArrayList<>();
+        DataFile input= new DataFile();
+        ArrayList<Core.Room> listRooms =new ArrayList<>();
+        OptionSearch search= new OptionSearch();
+        
 
         public TestJF() throws ParseException {
+            listRooms= input.importRoom();
+            listCustomers=input.importCustomer();
                 initComponents();
+                
                 setLocationRelativeTo(this);
-                tableModel = (DefaultTableModel) tableKH.getModel();
+               // tableModel = (DefaultTableModel) tableKH.getModel();
+               // tableModel1 = (DefaultTableModel) tableRoom.getModel();
                 // cập nhật dữ liệu lên tab khách hàng khi chạy chương trình
                 readFile();
+
         }
 
         /**
@@ -79,20 +92,21 @@ public class TestJF extends javax.swing.JFrame {
                 jInternalFrame1 = new javax.swing.JInternalFrame();
                 jLabel1 = new javax.swing.JLabel();
                 jTabbedPane9 = new javax.swing.JTabbedPane();
-                jPanel2 = new javax.swing.JPanel();
+                jPInforTeam = new javax.swing.JPanel();
                 jLabel2 = new javax.swing.JLabel();
                 jLabel3 = new javax.swing.JLabel();
                 jLabel4 = new javax.swing.JLabel();
                 jLabel5 = new javax.swing.JLabel();
                 jLabel6 = new javax.swing.JLabel();
-                jPanel4 = new javax.swing.JPanel();
+                jPInforRoom = new javax.swing.JPanel();
                 jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
-                jPanel5 = new javax.swing.JPanel();
+                jScrollPane1.setBounds(21, 237, 1290, 396);
+                tableRoom = new javax.swing.JTable();
+                jPInforCustomer = new javax.swing.JPanel();
                 jScrollPane2 = new javax.swing.JScrollPane();
                 jScrollPane2.setBounds(26, 222, 1227, 443);
                 tableKH = new javax.swing.JTable();
-                jPanel6 = new javax.swing.JPanel();
+                jPRegister = new javax.swing.JPanel();
                 jLabel7 = new javax.swing.JLabel();
                 jLabel8 = new javax.swing.JLabel();
                 jLabel9 = new javax.swing.JLabel();
@@ -157,12 +171,12 @@ public class TestJF extends javax.swing.JFrame {
 
                 jLabel6.setText("5. Võ Quốc Toàn");
 
-                javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-                jPanel2.setLayout(jPanel2Layout);
-                jPanel2Layout.setHorizontalGroup(jPanel2Layout
+                javax.swing.GroupLayout gl_jPInforTeam = new javax.swing.GroupLayout(jPInforTeam);
+                jPInforTeam.setLayout(gl_jPInforTeam);
+                gl_jPInforTeam.setHorizontalGroup(gl_jPInforTeam
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup().addGap(17, 17, 17)
-                                                .addGroup(jPanel2Layout.createParallelGroup(
+                                .addGroup(gl_jPInforTeam.createSequentialGroup().addGap(17, 17, 17)
+                                                .addGroup(gl_jPInforTeam.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addComponent(jLabel2,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -185,9 +199,9 @@ public class TestJF extends javax.swing.JFrame {
                                                                                 301,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addContainerGap(1014, Short.MAX_VALUE)));
-                jPanel2Layout.setVerticalGroup(jPanel2Layout
+                gl_jPInforTeam.setVerticalGroup(gl_jPInforTeam
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup().addGap(18, 18, 18)
+                                .addGroup(gl_jPInforTeam.createSequentialGroup().addGap(18, 18, 18)
                                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
@@ -204,72 +218,203 @@ public class TestJF extends javax.swing.JFrame {
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addContainerGap(600, Short.MAX_VALUE)));
 
-                jTabbedPane9.addTab("Thông tin nhóm", jPanel2);
+                jTabbedPane9.addTab("Thông tin nhóm", jPInforTeam);
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                                new Object[][] { { "101", "Bình dân", "Trống", 60000, 50000, 1 },
-                                                { "102", "Bình dân", "Trống", 60000, 50000, 1 },
-                                                { "103", "Bình dân", "Trống", 60000, 50000, 1 },
-                                                { "104", "Bình dân", "Trống", 60000, 50000, 1 },
-                                                { "105", "Bình dân", "Trống", 60000, 50000, 1 },
-                                                { "201", "Bình dân", "Trống", 70000, 60000, 2 },
-                                                { "202", "Bình dân", "Trống", 70000, 60000, 2 },
-                                                { "203", "Bình dân", "Trống", 70000, 60000, 2 },
-                                                { "204", "Bình dân", "Trống", 70000, 60000, 2 },
-                                                { "205", "Bình dân", "Trống", 70000, 60000, 2 },
-                                                { "301", "Cao cấp", "Trống", 90000, 80000, 1 },
-                                                { "302", "Cao cấp", "Trống", 90000, 80000, 1 },
-                                                { "303", "Cao cấp", "Trống", 90000, 80000, 1 },
-                                                { "304", "Cao cấp", "Trống", 100000, 90000, 2 },
-                                                { "305", "Cao cấp", "Trống", 100000, 90000, 2 },
-                                                { "401", "KING", "Trống", 150000, 120000, 1 },
-                                                { "402", "KING", "Trống", 150000, 120000, 1},
-                                                { "403", "KING", "Trống", 150000, 120000, 1 }, 
-                                                { "403", "KING", "Trống", 200000, 180000, 2 },
-                                                { "403", "KING", "Trống", 200000, 180000, 2 }},
-                                new String[] { "Mã phòng", "Loại", "Tình trạng", "Giá thuê(1hours)",
-                                                "Giá thuê(Qua đêm),", "Số giường" }));
-                jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+                tableRoom.addKeyListener(new java.awt.event.KeyAdapter() {
                         public void keyReleased(java.awt.event.KeyEvent evt) {
                                 jTable1KeyReleased(evt);
                         }
                 });
-                jScrollPane1.setViewportView(jTable1);
-                if (jTable1.getColumnModel().getColumnCount() > 0) {
-                        jTable1.getColumnModel().getColumn(0).setResizable(false);
-                        jTable1.getColumnModel().getColumn(1).setResizable(false);
-                        jTable1.getColumnModel().getColumn(2).setResizable(false);
-                        jTable1.getColumnModel().getColumn(3).setResizable(false);
-                        jTable1.getColumnModel().getColumn(4).setResizable(false);
+                jScrollPane1.setViewportView(tableRoom);
+                if (tableRoom.getColumnModel().getColumnCount() > 0) {
+                        tableRoom.getColumnModel().getColumn(0).setResizable(false);
+                        tableRoom.getColumnModel().getColumn(1).setResizable(false);
+                        tableRoom.getColumnModel().getColumn(2).setResizable(false);
+                        tableRoom.getColumnModel().getColumn(3).setResizable(false);
+                        tableRoom.getColumnModel().getColumn(4).setResizable(false);
                 }
-
-                javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-                jPanel4.setLayout(jPanel4Layout);
-                jPanel4Layout.setHorizontalGroup(jPanel4Layout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createSequentialGroup().addContainerGap()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1290,
-                                                                Short.MAX_VALUE)
-                                                .addGap(36, 36, 36)));
-                jPanel4Layout.setVerticalGroup(jPanel4Layout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 361, Short.MAX_VALUE)));
-
-                jTabbedPane9.addTab("Tình trạng phòng", jPanel4);
-
+                ShowOnTableRoom(listRooms);
+                jTabbedPane9.addTab("Tình trạng phòng", jPInforRoom);
+                jPInforRoom.setLayout(null);
+                jPInforRoom.add(jScrollPane1);
                 
+                panelSearchRoom = new JPanel();
+                panelSearchRoom.setBounds(21, 11, 1300, 210);
+                jPInforRoom.add(panelSearchRoom);
+                panelSearchRoom.setLayout(null);
+                
+                lblIDsRoom = new JLabel("Mã phòng:");
+                lblIDsRoom.setBounds(100, 24, 110, 30);
+                panelSearchRoom.add(lblIDsRoom);
+                
+                txtIDsRoom = new JTextField();
+                txtIDsRoom.setBounds(220, 24, 180, 30);
+                panelSearchRoom.add(txtIDsRoom);
+                txtIDsRoom.setColumns(10);
+                
+                lblTypeRoom = new JLabel("Loại phòng:");
+                lblTypeRoom.setBounds(100, 78, 110, 30);
+                panelSearchRoom.add(lblTypeRoom);
+                
+                cbbTypeRoom = new JComboBox();
+                cbbTypeRoom.setModel(new DefaultComboBoxModel(setOptionTypeRoom(listRooms)));
+                cbbTypeRoom.setBounds(220, 78, 180, 30);
+                panelSearchRoom.add(cbbTypeRoom);
+               // System.out.println(setOptionTypeRoom(listRooms));
+                
+                lblStatus = new JLabel("Tình trạng:");
+                lblStatus.setBounds(100, 132, 110, 30);
+                panelSearchRoom.add(lblStatus);
+                
+                cbbStatus = new JComboBox();
+                cbbStatus.setModel(new DefaultComboBoxModel(new String[] {"", "Đầy", "Trống"}));
+                cbbStatus.setBounds(220, 132, 180, 30);
+                panelSearchRoom.add(cbbStatus);
+                
+                lblPrice = new JLabel("Giá thuê :");
+                lblPrice.setBounds(500, 24, 110, 30);
+                panelSearchRoom.add(lblPrice);
+                
+                txtPrice = new JTextField();
+                txtPrice.setBounds(620, 24, 180, 30);
+                panelSearchRoom.add(txtPrice);
+                
+                lblTypeRent1 = new JLabel("Giá thuê ( qua đêm):");
+                lblTypeRent1.setBounds(500, 78, 110, 30);
+                panelSearchRoom.add(lblTypeRent1);
+                
+                cbbTypeRent1 = new JComboBox();
+                cbbTypeRent1.setModel(new DefaultComboBoxModel(new String[] {"", "Tăng dần theo giá thuê giờ", "Tăng dần theo giá thuê qua đêm", "Giảm dần theo giá thuê giờ", "Giảm dần theo giá thuê qua đêm"}));
+                cbbTypeRent1.setBounds(620, 78, 180, 30);
+                panelSearchRoom.add(cbbTypeRent1);
+                
+                lblBeds = new JLabel("Số giường");
+                lblBeds.setBounds(500, 132, 110, 30);
+                panelSearchRoom.add(lblBeds);
+                
+                cbbBeds = new JComboBox();
+                cbbBeds.setModel(new DefaultComboBoxModel(setOptionBeds(listRooms)));
+                cbbBeds.setBounds(620, 132, 180, 30);
+                panelSearchRoom.add(cbbBeds);
+                
+                btnSearchRoom = new JButton("Tìm kiếm");
+                btnSearchRoom.setBounds(914, 28, 198, 70);
+                panelSearchRoom.add(btnSearchRoom);
+                btnSearchRoom.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ArrayList<Core.Room> listEndSearchRooms = new ArrayList<>();
+						listEndSearchRooms= search.SearchRoom(listRooms, txtIDsRoom.getText(),cbbStatus.getItemAt(cbbStatus.getSelectedIndex()).toString(), cbbBeds.getItemAt(cbbBeds.getSelectedIndex()).toString(), cbbTypeRoom.getItemAt(cbbTypeRoom.getSelectedIndex()).toString(),txtPrice.getText());
+						ResetTableRoom();
+						if (cbbTypeRent1.getSelectedIndex()==2) {
+					        Collections.sort(listEndSearchRooms, new Comparator<Core.Room>() {
+					        	@Override
+					            public int compare(Core.Room r1, Core.Room r2) {
+					                if (r1.getPrice1Hour() < r2.getPrice1Hour()) {
+					                    return -1;
+					                } else {
+					                    if (r1.getPrice1Hour() == r2.getPrice1Hour()) {
+					                        return 0;
+					                    } else {
+					                        return 1;
+					                    }
+					                }
+					            }
+					        });
+						}
+						if (cbbTypeRent1.getSelectedIndex()==3) {
+							Collections.sort(listEndSearchRooms, new Comparator<Core.Room>() {
+								@Override
+					            public int compare(Core.Room r1, Core.Room r2) {
+					                if (r1.getPriceOverNight() < r2.getPriceOverNight()) {
+					                    return -1;
+					                } else {
+					                    if (r1.getPriceOverNight() == r2.getPriceOverNight()) {
+					                        return 0;
+					                    } else {
+					                        return 1;
+					                    }
+					                }
+					            }
+							});
+							
+						}
+						if (cbbTypeRent1.getSelectedIndex()==4) {
+					        Collections.sort(listEndSearchRooms, new Comparator<Core.Room>() {
+					        	@Override
+					            public int compare(Core.Room r1, Core.Room r2) {
+					                if (r1.getPrice1Hour() < r2.getPrice1Hour()) {
+					                    return 1;
+					                } else {
+					                    if (r1.getPrice1Hour() == r2.getPrice1Hour()) {
+					                        return 0;
+					                    } else {
+					                        return -1;
+					                    }
+					                }
+					            }
+					        });
+						}
+						if (cbbTypeRent1.getSelectedIndex()==5) {
+							Collections.sort(listEndSearchRooms, new Comparator<Core.Room>() {
+								@Override
+					            public int compare(Core.Room r1, Core.Room r2) {
+					                if (r1.getPriceOverNight() < r2.getPriceOverNight()) {
+					                    return 1;
+					                } else {
+					                    if (r1.getPriceOverNight() == r2.getPriceOverNight()) {
+					                        return 0;
+					                    } else {
+					                        return -1;
+					                    }
+					                }
+					            }
+							});
+							
+						}
+						if (listEndSearchRooms.get(0).getiDsRoom().equals("NoneItem")) {}
+						else {
+						ShowOnTableRoom(listEndSearchRooms);}
+						listEndSearchRooms=null;
+					}
+				});
+                
+                btnResetRoomSearchForm = new JButton("Nhập lại");
+                btnResetRoomSearchForm.setBounds(914, 122, 89, 30);
+                panelSearchRoom.add(btnResetRoomSearchForm);
+                btnResetRoomSearchForm.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						txtIDsRoom.setText("");
+						txtPrice.setText("");
+						cbbStatus.setSelectedIndex(0);
+						cbbBeds.setSelectedIndex(0);
+						cbbTypeRent1.setSelectedIndex(0);
+						cbbTypeRoom.setSelectedIndex(0);
+					}
+				});
+                btnShowAllRoom = new JButton("Xem tất cả");
+                btnShowAllRoom.setBounds(1023, 122, 89, 30);
+                panelSearchRoom.add(btnShowAllRoom);
+                btnShowAllRoom.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ResetTableRoom();
+						ShowOnTableRoom(listRooms);
+					}
+				});
                 jScrollPane2.setViewportView(tableKH);
 
-                jTabbedPane9.addTab("Khách hàng", jPanel5);
-                jPanel5.setLayout(null);
-                jPanel5.add(jScrollPane2);
+                jTabbedPane9.addTab("Khách hàng", jPInforCustomer);
+                jPInforCustomer.setLayout(null);
+                jPInforCustomer.add(jScrollPane2);
                 
                 JPanel SearchRoom = new JPanel();
                 SearchRoom.setBounds(0, 0, 1326, 209);
-                jPanel5.add(SearchRoom);
+                jPInforCustomer.add(SearchRoom);
                 
                 JLabel lblMaKH = new JLabel("Mã khách hàng:");
                 lblMaKH.setBounds(36, 31, 97, 14);
@@ -336,11 +481,9 @@ public class TestJF extends javax.swing.JFrame {
                 SearchRoom.add(lblMaKH_7);
                 SearchRoom.add(cbbHinhThuc);
                 //==============Nhap du lieu tu file============/
-                ArrayList<Core.Customer> listCustomers = new ArrayList<>();
-                DataFile input= new DataFile();
-                listCustomers=input.importCustomer();
-                ArrayList<Core.Room> listRooms =new ArrayList<>();
+
                 listRooms= input.importRoom();
+                listCustomers=input.importCustomer();
 //                ///--- hien thi bang thong tin KH------------------------//
 //                String[] colTableCus= { "STT", "Mã Kh", "Họ và tên", "CMND", "Số điện thoại", "Thời gian nhận", "Thời gian trả",
 //                        "Mã phòng", "Hình thức thuê", "Thành tiền" };
@@ -383,8 +526,65 @@ public class TestJF extends javax.swing.JFrame {
                 SearchRoom.add(cbbTimeOut);
                 
                 JButton btnSearchCustomer = new JButton("Tìm Kiếm");
-                btnSearchCustomer.setBounds(1107, 80, 140, 60);
+                btnSearchCustomer.setBounds(1107, 31, 183, 68);
                 SearchRoom.add(btnSearchCustomer);
+                
+                btnResetCustSearchForm = new JButton("Nhập lại");
+                btnResetCustSearchForm.setBounds(1107, 120, 90, 30);
+                SearchRoom.add(btnResetCustSearchForm);
+                btnResetCustSearchForm.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						txtID.setText("");
+						txtFullName.setText("");
+						txtIDPersonal.setText("");
+						txtPhone.setText("");
+						txtIDRoom.setText("");
+						txtDayIn.setText("dd-mm-yyyy");
+						txtDayOut.setText("dd-mm-yyyy");
+						cbbHinhThuc.setSelectedIndex(0);
+						cbbTimeOut.setSelectedIndex(0);
+						cbbTimIn.setSelectedIndex(0);
+					}
+				});
+                btnShowAllCust = new JButton("Xem tất cả");
+                btnShowAllCust.setBounds(1200, 120, 90, 30);
+                SearchRoom.add(btnShowAllCust);
+                btnShowAllCust.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						resetTableCus();
+						ShowOnTableCus(listCustomers, listRooms);
+						
+					}
+				});
+                btnSearchCustomer.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ArrayList<Core.Customer> listInforSearchArrayList = new ArrayList<>();
+						listInforSearchArrayList=search.searchCustomers(listCustomers, txtID.getText(),
+																						txtPhone.getText(),
+																						cbbHinhThuc.getItemAt(cbbHinhThuc.getSelectedIndex()).toString(),
+																						txtFullName.getText(),
+																						txtIDPersonal.getText(),
+																						txtIDRoom.getText(),
+																						txtDayIn.getText(), 
+																						txtDayOut.getText(), 
+																						cbbTimIn.getItemAt(cbbTimIn.getSelectedIndex()), 
+																						cbbTimeOut.getItemAt(cbbTimeOut.getSelectedIndex()));
+						resetTableCus();
+						System.out.println(txtID.getText());
+						if (listInforSearchArrayList.get(0).getRollNo().equals("NoneItem")) {}
+							else {
+								ShowOnTableCus(listCustomers, listRooms);
+							}
+						listInforSearchArrayList=null;
+						//System.out.println(listInforSearchArrayList.get(0).toString());
+					}
+				});
                
                 jLabel7.setText("Tên KH: ");
 
@@ -458,30 +658,30 @@ public class TestJF extends javax.swing.JFrame {
 
                 jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Theo giờ", "Qua đêm" }));
 
-                javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-                jPanel6.setLayout(jPanel6Layout);
-                jPanel6Layout.setHorizontalGroup(jPanel6Layout
+                javax.swing.GroupLayout gl_jPRegister = new javax.swing.GroupLayout(jPRegister);
+                jPRegister.setLayout(gl_jPRegister);
+                gl_jPRegister.setHorizontalGroup(gl_jPRegister
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel6Layout.createSequentialGroup().addGap(120, 120, 120)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                .addGroup(gl_jPRegister.createSequentialGroup().addGap(120, 120, 120)
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.TRAILING)
                                                                 .addComponent(jLabel7).addComponent(jLabel8)
                                                                 .addComponent(jLabel9).addComponent(jLabel14))
                                                 .addGap(18, 18, 18)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                                                                .addGroup(jPanel6Layout
+                                                                .addGroup(gl_jPRegister.createSequentialGroup()
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                .addGroup(jPanel6Layout
+                                                                                                .addGroup(gl_jPRegister
                                                                                                                 .createSequentialGroup()
                                                                                                                 .addComponent(jTextField3,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                 259,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                                 .addGap(0, 0, Short.MAX_VALUE))
-                                                                                                .addGroup(jPanel6Layout
+                                                                                                .addGroup(gl_jPRegister
                                                                                                                 .createSequentialGroup()
                                                                                                                 .addComponent(jTextField1,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -491,12 +691,12 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 Short.MAX_VALUE)))
-                                                                                .addGroup(jPanel6Layout
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                                jPanel6Layout.createSequentialGroup()
-                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                gl_jPRegister.createSequentialGroup()
+                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                 .createParallelGroup(
                                                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                                                 .addComponent(jLabel11)
@@ -508,12 +708,12 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                                 javax.swing.GroupLayout.Alignment.TRAILING))
                                                                                                                                 .addPreferredGap(
                                                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                 .createParallelGroup(
                                                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                 .createSequentialGroup()
-                                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                                 .createParallelGroup(
                                                                                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                                                                                 .addComponent(jComboBox1,
@@ -526,11 +726,11 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                                                                                                 .addGap(115, 115,
                                                                                                                                                                                 115)
-                                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                                 .createParallelGroup(
                                                                                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING,
                                                                                                                                                                                                 false)
-                                                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                                                 .createSequentialGroup()
                                                                                                                                                                                                 .addComponent(jLabel15)
                                                                                                                                                                                                 .addPreferredGap(
@@ -539,7 +739,7 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                                                                                 0,
                                                                                                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                                                                                                 Short.MAX_VALUE))
-                                                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                                                 .createSequentialGroup()
                                                                                                                                                                                                 .addComponent(jLabel10)
                                                                                                                                                                                                 .addPreferredGap(
@@ -548,7 +748,7 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                                                                                                 134,
                                                                                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                                                                                                                .addGroup(jPanel6Layout
+                                                                                                                                                .addGroup(gl_jPRegister
                                                                                                                                                                 .createParallelGroup(
                                                                                                                                                                                 javax.swing.GroupLayout.Alignment.TRAILING,
                                                                                                                                                                                 false)
@@ -564,7 +764,7 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                                                 Short.MAX_VALUE)))
                                                                                                                                 .addGap(0, 0, Short.MAX_VALUE))
                                                                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                                jPanel6Layout.createSequentialGroup()
+                                                                                                                gl_jPRegister.createSequentialGroup()
                                                                                                                                 .addComponent(jButton3,
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                                 120,
@@ -583,8 +783,8 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                                                 .addGap(100, 100,
                                                                                                                                                 100))))
-                                                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                                                                .addGroup(jPanel6Layout
+                                                                .addGroup(gl_jPRegister.createSequentialGroup()
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                 .addComponent(jTextField2,
@@ -596,10 +796,10 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                 258,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                 .addGap(0, 889, Short.MAX_VALUE)))));
-                jPanel6Layout.setVerticalGroup(jPanel6Layout
+                gl_jPRegister.setVerticalGroup(gl_jPRegister
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel6Layout.createSequentialGroup().addGap(36, 36, 36)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                .addGroup(gl_jPRegister.createSequentialGroup().addGap(36, 36, 36)
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jLabel7).addComponent(jLabel11)
                                                                 .addComponent(jTextField3,
@@ -614,11 +814,11 @@ public class TestJF extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                                                .addGroup(gl_jPRegister.createSequentialGroup()
                                                                                 .addGap(67, 67, 67)
-                                                                                .addGroup(jPanel6Layout
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                                 .addComponent(jLabel12)
@@ -632,7 +832,7 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                 .addGap(65, 65, 65)
-                                                                                .addGroup(jPanel6Layout
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                                 .addComponent(jComboBox3,
@@ -640,9 +840,9 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                 .addComponent(jLabel13)))
-                                                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                                                .addGroup(gl_jPRegister.createSequentialGroup()
                                                                                 .addGap(77, 77, 77)
-                                                                                .addGroup(jPanel6Layout
+                                                                                .addGroup(gl_jPRegister
                                                                                                 .createParallelGroup(
                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                 .addComponent(jTextField1,
@@ -651,14 +851,14 @@ public class TestJF extends javax.swing.JFrame {
                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                 .addComponent(jLabel8))))
                                                 .addGap(17, 17, 17)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jLabel9).addComponent(jTextField2,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 44,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jComboBox6,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -666,7 +866,7 @@ public class TestJF extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(jLabel16))
                                                 .addGap(49, 49, 49)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jLabel14).addComponent(jTextField4,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -674,12 +874,12 @@ public class TestJF extends javax.swing.JFrame {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                 194, Short.MAX_VALUE)
-                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                .addGroup(gl_jPRegister.createParallelGroup(
                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(jButton1).addComponent(jButton2).addComponent(jButton3))
                                                 .addGap(131, 131, 131)));
 
-                jTabbedPane9.addTab("Đặt phòng", jPanel6);
+                jTabbedPane9.addTab("Đặt phòng", jPRegister);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -712,7 +912,7 @@ public class TestJF extends javax.swing.JFrame {
         }
         private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_DOWN) {
-                        int selectedIndex = jTable1.getSelectedRow();
+                        int selectedIndex = tableRoom.getSelectedRow();
                         displayDetails(selectedIndex);
                 }
         }
@@ -1069,17 +1269,17 @@ public class TestJF extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel8;
         private javax.swing.JLabel jLabel9;
         private javax.swing.JPanel jPanel1;
-        private javax.swing.JPanel jPanel2;
-        private javax.swing.JPanel jPanel4;
-        private javax.swing.JPanel jPanel5;
-        private javax.swing.JPanel jPanel6;
+        private javax.swing.JPanel jPInforTeam;
+        private javax.swing.JPanel jPInforRoom;
+        private javax.swing.JPanel jPInforCustomer;
+        private javax.swing.JPanel jPRegister;
         private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JScrollPane jScrollPane2;
         private javax.swing.JTabbedPane jTabbedPane2;
         private javax.swing.JTabbedPane jTabbedPane3;
         private javax.swing.JTabbedPane jTabbedPane4;
         private javax.swing.JTabbedPane jTabbedPane9;
-        private javax.swing.JTable jTable1;
+        private javax.swing.JTable tableRoom;
         private javax.swing.JTable tableKH;
         private javax.swing.JTextField jTextField1;
         private javax.swing.JTextField jTextField2;
@@ -1098,6 +1298,50 @@ public class TestJF extends javax.swing.JFrame {
         private JTextField txtIDRoom;
         private JComboBox<String> cbbTimIn;
         private JComboBox<String> cbbTimeOut;
+        private JPanel panelSearchRoom;
+        private JLabel lblIDsRoom;
+        private JTextField txtIDsRoom;
+        private JLabel lblTypeRoom;
+        private JComboBox cbbTypeRoom;
+        private JLabel lblStatus;
+        private JComboBox cbbStatus;
+        private JLabel lblPrice;
+        private JTextField txtPrice;
+        private JLabel lblTypeRent1;
+        private JComboBox cbbTypeRent1;
+        private JLabel lblBeds;
+        private JComboBox cbbBeds;
+        private JButton btnSearchRoom;
+        private JButton btnResetRoomSearchForm;
+        private JButton btnShowAllRoom;
+        private JButton btnResetCustSearchForm;
+        private JButton btnShowAllCust;
+        public void resetTableCus() {
+        	String[] colTableCus= { "STT", "Mã Kh", "Họ và tên", "CMND", "Số điện thoại", "Thời gian nhận", "Thời gian trả",
+                    "Mã phòng", "Hình thức thuê", "Thành tiền" };
+        	DefaultTableModel tableModel = new DefaultTableModel(colTableCus, 0);
+        	tableKH.setModel(tableModel);
+		}
+        public void ShowOnTableRoom(ArrayList<Core.Room> listRooms) {
+			String[] colTableRoom= {"STT", "Mã phòng","Trạng thái","Số giường","Loại phòng","Giá thuê (theo giờ )","Giá thuê (qua đêm)"};
+			DefaultTableModel tableModel = new DefaultTableModel(colTableRoom,0);
+			for (int i=0; i< listRooms.size();i++) {
+				Object[] data = {i+1,
+									listRooms.get(i).getiDsRoom(),
+									listRooms.get(i).getStatus(),
+									listRooms.get(i).getBeds(),
+									listRooms.get(i).getTypeRoom(),
+									listRooms.get(i).getPrice1Hour(),
+									listRooms.get(i).getPriceOverNight()};
+				tableModel.addRow(data);
+				}
+			tableRoom.setModel(tableModel);
+			}
+        public void ResetTableRoom() {
+			String[] colTableRoom= {"STT", "Mã phòng","Trạng thái","Số giường","Loại phòng","Giá thuê (theo giờ )","Giá thuê (qua đêm)"};
+			DefaultTableModel tableModel = new DefaultTableModel(colTableRoom,0);
+			tableRoom.setModel(tableModel);
+			}
         public void ShowOnTableCus(ArrayList<Core.Customer> listCustomers, ArrayList<Core.Room> listRooms) {
         	String[] colTableCus= { "STT", "Mã Kh", "Họ và tên", "CMND", "Số điện thoại", "Thời gian nhận", "Thời gian trả",
                     "Mã phòng", "Hình thức thuê", "Thành tiền" };
@@ -1116,5 +1360,36 @@ public class TestJF extends javax.swing.JFrame {
             	tableModel.addRow(data);
             	}
             tableKH.setModel(tableModel);
+		}
+        public String[] setOptionBeds(ArrayList<Core.Room> dataRooms) {
+			String[] option = new String[] {""};
+			for (Core.Room room : dataRooms) {
+				if (checkList(option, room.getBeds())) {
+					option=addElement(option, room.getBeds());
+				}
+			}
+			return option;
+		}
+        public String[] setOptionTypeRoom(ArrayList<Core.Room> dataRooms) {
+			String[] optionType = new String[] {""};
+			for (Core.Room room : dataRooms) {
+				if (checkList(optionType, room.getTypeRoom())) {
+					optionType=addElement(optionType, room.getTypeRoom());
+				}
+			}
+			return optionType;
+		}
+        static String[] addElement(String[] a, String e) {
+            a  = Arrays.copyOf(a, a.length + 1);
+            a[a.length - 1] = e;
+            return a;
+        }
+        public boolean checkList(String[] List, String key) {
+			for (String string : List) {
+				if (key.equals(string)) {
+					return false;
+				}
+			}
+			return true;
 		}
 }

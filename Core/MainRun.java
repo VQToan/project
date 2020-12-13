@@ -36,8 +36,9 @@ public class MainRun {
 		System.out.println(k.toString());
 		//System.out.println(c.get(0).getPriceOverNight());
 		//System.out.println(search.SearchRoom(b, a.get(0).getiDRoom(), "None", "None",  "None",  "None",  "None").get(0).getPriceOverNight());
-		System.out.println(k.calTime());
-		System.out.println(search.SearchRoom(b, "001", "None", "None",  "None",  "None",  "None").get(0).getPrice1Hour());
+		//System.out.println(k.calTime());
+		System.out.println();
+		System.out.println(search.SearchRoom(b, "1", "None", "None",  "None",  "None",  "None").get(0).toString());
 	}
 	public static boolean check(Room data, String method, String key) {
 		boolean flag= false;
