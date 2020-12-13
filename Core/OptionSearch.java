@@ -88,7 +88,7 @@ public class OptionSearch {
 		if (key=="") flag= true;
 		else {
 			if (method.equals( "iDsRoom") && data.getiDsRoom().equals(key) ) flag= true;
-			if (method.equals( "status") && String.valueOf(data.getStatus()).equals(key)) flag= true;
+			if (method.equals( "status") && data.getStatus().equals(key)) flag= true;
 			if (method.equals( "beds") && data.getBeds().equals(key)) flag= true;
 			if(method.equals( "typeRoom") && data.getTypeRoom().equals(key)) flag= true;
 			if (method.equals("price1Hour") && String.valueOf(data.getPrice1Hour()).equals(key)) flag= true;
@@ -111,7 +111,7 @@ public class OptionSearch {
 		}
 		//endSearchArrayList.add(new Room());
 		if (endSearchArrayList.isEmpty()) {
-			endSearchArrayList.add(new Room("NoneItem",true, "", "", 0,0));
+			endSearchArrayList.add(new Room("NoneItem","", "", "", 0,0));
 			return endSearchArrayList;
 		}
 		else return endSearchArrayList;

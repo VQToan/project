@@ -60,7 +60,7 @@ public class RoomHandler extends DefaultHandler{
 		if(isIDsRoom) {
 			currentRoom.setiDsRoom(value);
 		}else if (isStatus) {
-			currentRoom.setStatus(Boolean.valueOf(value));
+			currentRoom.setStatus(value);
 		}else if (isBeds) {
 			currentRoom.setBeds(value);
 		}else if (isTypeRoom) {

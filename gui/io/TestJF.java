@@ -60,11 +60,13 @@ public class TestJF extends javax.swing.JFrame {
         DataFile input= new DataFile();
         ArrayList<Core.Room> listRooms =new ArrayList<>();
         OptionSearch search= new OptionSearch();
+        OptionAction action= new OptionAction();
         
 
         public TestJF() throws ParseException {
             listRooms= input.importRoom();
             listCustomers=input.importCustomer();
+            listRooms=action.autoCheckTime(listRooms, listCustomers);
                 initComponents();
                 
                 setLocationRelativeTo(this);

@@ -8,7 +8,7 @@ public class Room implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String iDsRoom;
-	private Boolean status;
+	private String status;
 	private String beds; // sá»‘ giÆ°á»�ng (1- Ä‘Æ¡n , 2- Ä‘Ã´i, 11- 2 láº»)
 	private String typeRoom; // (option : N - normal, V - vip)
 	private int price1Hour;
@@ -30,10 +30,10 @@ public class Room implements Serializable{
 	public void setiDsRoom(String iDsRoom) {
 		this.iDsRoom = iDsRoom;
 	}
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public String getBeds() {
@@ -60,7 +60,7 @@ public class Room implements Serializable{
 	public void setPriceOverNight(int priceOverNight) {
 		this.priceOverNight = priceOverNight;
 	}
-	public Room(String iDsRoom, Boolean status, String beds, String typeRoom, int price1Hour, int priceOverNight) {
+	public Room(String iDsRoom, String status, String beds, String typeRoom, int price1Hour, int priceOverNight) {
 		super();
 		this.iDsRoom = iDsRoom;
 		this.status = status;
@@ -72,7 +72,7 @@ public class Room implements Serializable{
 	public String getXMLStringofRoom() {
 		return "	<Room>\r\n"
 				+ "		<iDsRoom>"+iDsRoom+"</iDsRoom>\r\n"
-				+ "		<status>"+String.valueOf(status)+"</status>\r\n"
+				+ "		<status>"+status+"</status>\r\n"
 				+ "		<beds>"+beds+"</beds>\r\n"
 				+ "		<typeRoom>"+typeRoom+"</typeRoom>\r\n"
 				+ "		<price1Hour>"+String.valueOf(price1Hour)+"</price1Hour>\r\n"

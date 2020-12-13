@@ -132,7 +132,5 @@ public class Customer implements Serializable{
 		if (search.SearchRoom(dataRoom, iDRoom, "", "", "", "").size()>1) {
 			return search.SearchRoom(dataRoom, iDRoom, "", "", "", "").get(0).getPriceOverNight();
 		}else return 0;
-		
-		
 	}
 }
