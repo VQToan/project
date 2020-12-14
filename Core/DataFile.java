@@ -25,7 +25,7 @@ public class DataFile {
 				+ "\n</CustomerList>";
 		FileOutputStream fos= null;
 		try {
-			fos = new FileOutputStream("D:\\Customer.xml");
+			fos = new FileOutputStream("Customer.xml");
 			byte[] data = xmlString.getBytes();
 			fos.write(data);
 	}catch (Exception e) {
@@ -44,7 +44,7 @@ public class DataFile {
 		ArrayList<Customer> dataCustomers = new ArrayList<>();
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream("D:\\Customer.xml");
+			fis = new FileInputStream("Customer.xml");
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser parser =factory.newSAXParser();
 			CustomerHandler handler = new CustomerHandler();
@@ -84,7 +84,7 @@ public class DataFile {
 				+ "\n</RoomList>";
 		FileOutputStream fos= null;
 		try {
-			fos = new FileOutputStream("D:\\Room.xml");
+			fos = new FileOutputStream("Room.xml");
 			byte[] data = xmlString.getBytes();
 			fos.write(data);
 	}catch (Exception e) {
@@ -103,7 +103,7 @@ public class DataFile {
 		ArrayList<Room> dataRooms= new ArrayList<>();
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream("D:\\Room.xml");
+			fis = new FileInputStream("Room.xml");
 			SAXParserFactory factory1 = SAXParserFactory.newInstance();
 			SAXParser parser1 =factory1.newSAXParser();
 			RoomHandler handler1 = new RoomHandler();

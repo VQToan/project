@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +68,19 @@ public class TestJF extends javax.swing.JFrame {
         public TestJF() throws ParseException {
             listRooms= input.importRoom();
             listCustomers=input.importCustomer();
-            listRooms=action.autoCheckTime(listRooms, listCustomers);
+//            input.exportCustomer(listCustomers);
+//            input.exportRoom(listRooms);
+            Timer timer = new Timer();
+            int begin = 0;
+            int timeInterval = 60000;
+			timer.schedule(new TimerTask() {
+               @Override
+               public void run() {
+                   //call the method
+            	   listRooms=action.autoCheckTime(listRooms, listCustomers);
+            	   input.exportRoom(listRooms);
+               }
+            }, begin, timeInterval);
                 initComponents();
                 
                 setLocationRelativeTo(this);
